@@ -1,0 +1,1 @@
+# PHP Environment for Laravel Framework
