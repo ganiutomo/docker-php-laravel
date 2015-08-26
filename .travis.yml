@@ -13,6 +13,6 @@ env:
   - TAGS=5.6
 
 script:
-  - docker build -t ganiutomo/php:{$TAGS} {$TAGS}/.
-  - docker build -t ganiutomo/php:{$TAGS}/fpm {$TAGS}/fpm/.
-  - docker build -t ganiutomo/php:{$TAGS}/apache/ {$TAGS}/apache/.
+  - docker build -t ganiutomo/php:$TAGS $TAGS/.
+  - docker build -t ganiutomo/php:$TAGS/fpm $TAGS/fpm/.
+  - docker build -t ganiutomo/php:$TAGS/apache/ $TAGS/apache/.
