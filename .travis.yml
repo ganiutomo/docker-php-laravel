@@ -4,6 +4,9 @@ branches:
 
 sudo: required
 
+services:
+  - docker
+
 language: php
 
 php:
@@ -11,12 +14,16 @@ php:
   - 5.5
   - 5.6
 
-services:
-  - docker
-
 env:
-  - TAGS=cli
-  - TAGS=fpm
-  - TAGS=apache
+  - SAPI=cli
+  - SAPI=fpm
+  - SAPI=apache
 
-script: "docker build -t ganiutomo/php:$TRAVIS_PHP_VERSION-$TAGS ."
+before_install:
+  - sudo apt-get update > /dev/null
+
+install:
+  - sudo apt-get install -y php5-cli
+
+script:
+  - docker build -t ganiutomo/php:$TRAVIS_PHP_VERSION-$SAPI .
