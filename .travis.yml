@@ -7,23 +7,12 @@ sudo: required
 services:
   - docker
 
-language: php
-
-php:
-  - 5.4
-  - 5.5
-  - 5.6
-
 env:
-  - SAPI=cli
-  - SAPI=fpm
-  - SAPI=apache
-
-before_install:
-  - sudo apt-get update > /dev/null
-
-install:
-  - sudo apt-get install -y php5-cli
+  - TAGS=5.4
+  - TAGS=5.5
+  - TAGS=5.6
 
 script:
-  - docker build -t ganiutomo/php:$TRAVIS_PHP_VERSION-$SAPI .
+  - docker build -t ganiutomo/php:{$TAGS} {$TAGS}/.
+  - docker build -t ganiutomo/php:{$TAGS}/fpm {$TAGS}/fpm/.
+  - docker build -t ganiutomo/php:{$TAGS}/apache/ {$TAGS}/apache/.
