@@ -1,3 +1,15 @@
 branches:
   only:
     - develop
+
+sudo: required
+
+service:
+  - docker
+
+before_install:
+  - docker pull php
+
+script:
+  - docker build -t ganiutomo/php .
+  - docker run ganiutomo/php php -m
