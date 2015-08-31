@@ -1,5 +1,7 @@
 FROM php:5.5-cli
 
+MAINTAINER Gani Utomo <ganiutomo@gmail.com>
+
 RUN apt-get update && apt-get install -y \
         freetds-dev \
         libpq-dev \
