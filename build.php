@@ -26,27 +26,32 @@ function writeFile($version, $type) {
 }
 
 function dockerFile($version, $type) {
-	$mods = [
-		"mbstring",
-	    "mcrypt",
-	    "mssql",
-	    "pdo_dblib",
-	    "pdo_mysql",
-	    "pdo_pgsql",
-	    "pgsql",
-	];
-
-	$mod5 = ["opcache"];
-
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
 	$install = "RUN docker-php-ext-install ";
 
-	if ($version !== "5.4") $mod = array_merge($mods, $mod5);
-	else $mod = $mods;
-
 	return "FROM php:{$version}-{$type}\n\n".
 	$require."\n".
 	$configs."\n".
-	$install.implode($mod, ' ')."\n";
+	$install.mods($version)."\n";
+}
+
+function mods($version) {
+	$mods = [
+		"5.4" => [
+			"mbstring",
+			"mcrypt",
+			"mssql",
+			"pdo_dblib",
+			"pdo_mysql",
+			"pdo_pgsql",
+			"pgsql",
+		],
+		"5.5" => ["opcache"],
+	];
+
+	if ($version !== "5.4") $mod = array_merge($mods["5.4"], $mods["5.5"]);
+	else $mod = $mods["5.4"];
+	
+	return implode($mod, ' ');
 }
