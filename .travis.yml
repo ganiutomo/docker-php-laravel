@@ -7,6 +7,8 @@ sudo: required
 services:
   - docker
 
+language: php
+
 env:
   - TAGS=5.4 SAPI=cli
   - TAGS=5.4 SAPI=fpm
