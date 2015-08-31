@@ -20,3 +20,4 @@ env:
 
 script:
   - docker build -t ganiutomo/php:$TAGS-$SAPI $TAGS/$SAPI/.
+  - docker run --rm ganiutomo/php:$TAGS-$SAPI php -m
