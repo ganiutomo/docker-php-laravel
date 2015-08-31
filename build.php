@@ -6,38 +6,13 @@ $tags = ["5.4","5.5","5.6"];
 $sapi = ["apache","cli","fpm"];
 $mods = [
 	"5.4" => [
-		// "apc",
-		// "apcu",
-		"bcmath",
-		"bz2",
-		"calendar",
-		"dba",
-		"exif",
-		"ftp",
-		"gd",
-		"gettext",
-		"gmp",
-		"imap",
-		// "mailparse",
 		"mbstring",
 		"mcrypt",
-		// "memcached",
-		// "mhash",
 		"mssql",
-		"pcntl",
 		"pdo_dblib",
 		"pdo_mysql",
 		"pdo_pgsql",
 		"pgsql",
-		"shmop",
-		"soap",
-		"sockets",
-		"sysvmsg",
-		"sysvsem",
-		"sysvshm",
-		"wddx",
-		// "xdebug",
-		"zip",
 	],
 	"5.5" => ["opcache"],
 ];
@@ -94,7 +69,7 @@ function writeFile($version, $type) {
 function dockerFile($version, $type) {
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
-	$install = "RUN docker-php-ext-install ";
+	$install = "    && docker-php-ext-install ";
 
 	return "FROM php:{$version}-{$type}\n\n".
 		$require."\n".
