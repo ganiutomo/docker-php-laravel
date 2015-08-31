@@ -9,4 +9,4 @@ RUN apt-get update \
 
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
 
-RUN docker-php-ext-install apc apcu bcmath bz2 calendar dba exif ftp gd gettext gmp imap mailparse mbstring mcrypt memcached mhash mssql pcntl pdo_dblib pdo_mysql pdo_pgsql pgsql shmop soap sockets sysvmsg sysvsem sysvshm wddx xdebug zip
+RUN docker-php-ext-install bcmath bz2 calendar dba exif ftp gd gettext gmp imap mbstring mcrypt mssql pcntl pdo_dblib pdo_mysql pdo_pgsql pgsql shmop soap sockets sysvmsg sysvsem sysvshm wddx zip

@@ -17,8 +17,6 @@ Supported tags:
   * 5.6-fpm [(Dockerfile)](5.6/fpm/Dockerfile)
 
 Additional module list:
-* apc
-* apcu
 * bcmath
 * bz2
 * calendar
@@ -29,11 +27,8 @@ Additional module list:
 * gettext
 * gmp
 * imap
-* mailparse
 * mbstring
 * mcrypt
-* memcached
-* mhash
 * mssql
 * pcntl
 * pdo_dblib
@@ -47,7 +42,6 @@ Additional module list:
 * sysvsem
 * sysvshm
 * wddx
-* xdebug
 * zip
 
 PHP 5.5 and 5.6 only:
