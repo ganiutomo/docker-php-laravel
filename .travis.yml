@@ -1,3 +1,25 @@
 branches:
   only:
     - develop
+
+sudo: required
+
+services:
+  - docker
+
+env:
+  - TAGS=5.4 SAPI=cli
+  - TAGS=5.4 SAPI=fpm
+  - TAGS=5.4 SAPI=apache
+  - TAGS=5.5 SAPI=cli
+  - TAGS=5.5 SAPI=fpm
+  - TAGS=5.5 SAPI=apache
+  - TAGS=5.6 SAPI=cli
+  - TAGS=5.6 SAPI=fpm
+  - TAGS=5.6 SAPI=apache
+
+before_install:
+  - docker build -t ganiutomo/php:$TAGS-$SAPI $TAGS/$SAPI/.
+
+script:
+  - docker run --rm ganiutomo/php:$TAGS-$SAPI php -m

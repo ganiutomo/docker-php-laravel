@@ -1,4 +1,4 @@
-FROM php:5.5-apache
+FROM php:5.4-cli
 
 MAINTAINER Gani Utomo <ganiutomo@gmail.com>
 
@@ -10,4 +10,4 @@ RUN apt-get update && apt-get install -y \
 
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 
-    && docker-php-ext-install mbstring mcrypt mssql pdo_dblib pdo_mysql pdo_pgsql pgsql opcache
+    && docker-php-ext-install mbstring mcrypt mssql pdo_dblib pdo_mysql pdo_pgsql pgsql
