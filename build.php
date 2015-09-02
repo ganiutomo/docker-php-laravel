@@ -19,6 +19,7 @@ $mods = [
 
 $versions = '';
 foreach ($tags as $tag) {
+	writeFile($tag);
 	$versions .= "* {$tag} [(Dockerfile)]({$tag}/cli/Dockerfile)\n";
 
 	foreach ($sapi as $sap) {
@@ -26,8 +27,14 @@ foreach ($tags as $tag) {
 
 		writeFile($tag, $sap);
 	}
-
 }
+
+
+foreach ($sapi as $sap) {
+	writeFile($sap);
+}
+
+writeFile();
 
 $modules = '';
 foreach ($mods as $keys => $vals) {
@@ -52,26 +59,38 @@ READ;
 chdir($_SERVER["PWD"]);
 file_put_contents('README.md', $read);
 
-function writeFile($version, $type) {
+function writeFile($version = NULL, $type = NULL) {
 	chdir($_SERVER["PWD"]);
 
 	$dockerfile = dockerFile($version, $type);
 
-	if (! is_dir($version)) mkdir($version);
-	chdir($version);
+	if (! is_null($version)) {
+		if(! is_dir($version)) mkdir($version);
+		chdir($version);
+	}
 
-	if (! is_dir($type)) mkdir($type);
-	chdir($type);
+	if (! is_null($type)) {
+		if(! is_dir($type)) mkdir($type);
+		chdir($type);
+	}
 
 	return file_put_contents('Dockerfile', $dockerfile);
 }
 
-function dockerFile($version, $type) {
+function dockerFile($version = NULL, $type = NULL) {
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
 	$install = "    && docker-php-ext-install ";
 
-	return "FROM php:{$version}-{$type}\n\n".
+	$tag = '';
+	if (! is_null($version) or ! is_null($type)) {
+		$tag .= ":".$version;
+		if (! is_null($version) and ! is_null($type)) $tag .= "-";
+		$tag .= $type;
+	}
+	$from = "FROM php".$tag."\n";
+
+	return $from."\n".
 		$require."\n".
 		$configs."\n".
 		$install.implode(mods($version), ' ')."\n";
