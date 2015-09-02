@@ -2,19 +2,16 @@
 
 # PHP Environment for Laravel Framework
 
-Supported tags:
-* 5.4 [(Dockerfile)](5.4/cli/Dockerfile)
-  * 5.4-apache [(Dockerfile)](5.4/apache/Dockerfile)
-  * 5.4-cli [(Dockerfile)](5.4/cli/Dockerfile)
-  * 5.4-fpm [(Dockerfile)](5.4/fpm/Dockerfile)
-* 5.5 [(Dockerfile)](5.5/cli/Dockerfile)
-  * 5.5-apache [(Dockerfile)](5.5/apache/Dockerfile)
-  * 5.5-cli [(Dockerfile)](5.5/cli/Dockerfile)
-  * 5.5-fpm [(Dockerfile)](5.5/fpm/Dockerfile)
-* 5.6 [(Dockerfile)](5.6/cli/Dockerfile)
-  * 5.6-apache [(Dockerfile)](5.6/apache/Dockerfile)
-  * 5.6-cli [(Dockerfile)](5.6/cli/Dockerfile)
-  * 5.6-fpm [(Dockerfile)](5.6/fpm/Dockerfile)
+Supported tags & respective `Dockerfile` links:
+* [`5.4-cli`,    `5.4`                    (5.4/Dockerfile)       ](5.4/Dockerfile)
+* [`5.4-apache`                           (5.4/apache/Dockerfile)](5.4/apache/Dockerfile)
+* [`5.4-fpm`                              (5.4/fpm/Dockerfile)   ](5.4/fpm/Dockerfile)
+* [`5.5-cli`,    `5.5`                    (5.5/Dockerfile)       ](5.5/Dockerfile)
+* [`5.5-apache`                           (5.5/apache/Dockerfile)](5.5/apache/Dockerfile)
+* [`5.5-fpm`                              (5.5/fpm/Dockerfile)   ](5.5/fpm/Dockerfile)
+* [`5.6-cli`,    `5.6`, `cli`,   `latest` (5.6/Dockerfile)       ](5.6/Dockerfile)
+* [`5.6-apache`,        `apache`          (5.6/apache/Dockerfile)](5.6/apache/Dockerfile)
+* [`5.6-fpm`,           `fpm`             (5.6/fpm/Dockerfile)   ](5.6/fpm/Dockerfile)
 
 Additional module list:
 * mbstring
