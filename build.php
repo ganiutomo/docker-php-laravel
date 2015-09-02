@@ -36,29 +36,6 @@ foreach ($sapi as $sap) {
 
 writeFile();
 
-$modules = '';
-foreach ($mods as $keys => $vals) {
-	if ($keys === '5.5') $modules .= "\nPHP 5.5 and 5.6 only:\n";
-
-	foreach ($vals as $mod) {
-		$modules .= "* {$mod}\n";
-	}
-}
-
-$read = <<<READ
-[![Build Status](https://travis-ci.org/ganiutomo/docker-php-laravel.svg?branch=develop)](https://travis-ci.org/ganiutomo/docker-php-laravel)
-
-# PHP Environment for Laravel Framework
-
-Supported tags:
-{$versions}
-Additional module list:
-{$modules}
-READ;
-
-chdir($_SERVER["PWD"]);
-file_put_contents('README.md', $read);
-
 function writeFile($version = NULL, $type = NULL) {
 	chdir($_SERVER["PWD"]);
 
