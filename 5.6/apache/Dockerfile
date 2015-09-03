@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     mbstring \
     mcrypt \
     mssql \
+    pcntl \
     pdo_dblib \
     pdo_mysql \
     pdo_pgsql \

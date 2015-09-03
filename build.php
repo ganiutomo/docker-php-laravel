@@ -10,6 +10,7 @@ $mods = [
 		"mbstring",
 		"mcrypt",
 		"mssql",
+		"pcntl",
 		"pdo_dblib",
 		"pdo_mysql",
 		"pdo_pgsql",
