@@ -21,7 +21,6 @@ $mods = [
 
 $versions = '';
 foreach ($tags as $tag) {
-	writeFile($tag);
 	$versions .= "* {$tag} [(Dockerfile)]({$tag}/cli/Dockerfile)\n";
 
 	foreach ($sapi as $sap) {
@@ -31,12 +30,6 @@ foreach ($tags as $tag) {
 	}
 }
 
-
-foreach ($sapi as $sap) {
-	writeFile($sap);
-}
-
-writeFile();
 
 function writeFile($version = NULL, $type = NULL) {
 	chdir($_SERVER["PWD"]);
@@ -59,7 +52,7 @@ function writeFile($version = NULL, $type = NULL) {
 function dockerFile($version = NULL, $type = NULL) {
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
-	$install = "    && docker-php-ext-install ";
+	$install = " && docker-php-ext-install \\\n    ";
 
 	$tag = '';
 	if (! is_null($version) or ! is_null($type)) {
@@ -70,9 +63,9 @@ function dockerFile($version = NULL, $type = NULL) {
 	$from = "FROM php".$tag."\n";
 
 	return $from."\n".
-		$require."\n".
-		$configs."\n".
-		$install.implode(mods($version), ' ')."\n";
+		$require.
+		$configs.
+		$install.implode(mods($version), " \\\n    ")."\n";
 }
 
 function mods($version) {
