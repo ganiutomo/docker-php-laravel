@@ -21,6 +21,7 @@ Additional module list:
 * pdo_mysql
 * pdo_pgsql
 * pgsql
+* zip
 
 PHP 5.5 and 5.6 only:
 * opcache

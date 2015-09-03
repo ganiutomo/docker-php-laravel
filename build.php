@@ -13,6 +13,7 @@ $mods = [
 		"pdo_mysql",
 		"pdo_pgsql",
 		"pgsql",
+		"zip",
 	],
 	"5.5" => ["opcache"],
 ];
