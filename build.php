@@ -5,19 +5,8 @@ echo "Build Dockerfile!\n";
 $tags = ["5.4","5.5","5.6"];
 $sapi = ["apache","cli","fpm"];
 $mods = [
-	"5.4" => [
-		"intl",
-		"mbstring",
-		"mcrypt",
-		"mssql",
-		"pcntl",
-		"pdo_dblib",
-		"pdo_mysql",
-		"pdo_pgsql",
-		"pgsql",
-		"zip",
-	],
 	"5.5" => ["opcache"],
+	"5.6" => ["opcache"],
 ];
 
 $versions = '';
@@ -53,7 +42,7 @@ function writeFile($version = NULL, $type = NULL) {
 function dockerFile($version = NULL, $type = NULL) {
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
-	$install = " && docker-php-ext-install \\\n    ";
+	$install = file_get_contents("install");
 
 	$tag = '';
 	if (! is_null($version) or ! is_null($type)) {
@@ -66,14 +55,15 @@ function dockerFile($version = NULL, $type = NULL) {
 	return $from."\n".
 		$require.
 		$configs.
-		$install.implode(mods($version), " \\\n    ")."\n";
+		rtrim($install).
+		mods($version);
 }
 
 function mods($version) {
 	global $mods;
 
-	if ($version !== "5.4") $mod = array_merge($mods["5.4"], $mods["5.5"]);
-	else $mod = $mods["5.4"];
+	if (array_key_exists($version, $mods))
+	$mod = " \\\n    ".implode($mods[$version], " \\\n    ");
 
-	return $mod;
+	return $mod."\n";
 }
