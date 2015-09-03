@@ -4,6 +4,7 @@ MAINTAINER Gani Utomo <ganiutomo@gmail.com>
 
 RUN apt-get update && apt-get install -y \
     freetds-dev \
+    libicu52 \
     libpq-dev \
     libmcrypt-dev \
  && rm -r /var/lib/apt/lists/* \
