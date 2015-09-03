@@ -43,6 +43,7 @@ function dockerFile($version = NULL, $type = NULL) {
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
 	$install = file_get_contents("install");
+	$cleanup = file_get_contents("cleanup");
 
 	$tag = '';
 	if (! is_null($version) or ! is_null($type)) {
@@ -56,7 +57,8 @@ function dockerFile($version = NULL, $type = NULL) {
 		$require.
 		$configs.
 		rtrim($install).
-		mods($version);
+		mods($version).
+		$cleanup;
 }
 
 function mods($version) {
@@ -65,5 +67,5 @@ function mods($version) {
 	if (array_key_exists($version, $mods))
 	$mod = " \\\n    ".implode($mods[$version], " \\\n    ");
 
-	return $mod."\n";
+	return $mod." \\\n";
 }

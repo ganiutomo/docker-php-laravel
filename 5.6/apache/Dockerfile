@@ -20,4 +20,6 @@ RUN apt-get update && apt-get install -y \
     pdo_pgsql \
     pgsql \
     zip \
-    opcache
+    opcache \
+ && cd /usr/src/php \
+ && make clean

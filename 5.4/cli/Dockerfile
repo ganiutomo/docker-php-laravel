@@ -19,4 +19,6 @@ RUN apt-get update && apt-get install -y \
     pdo_mysql \
     pdo_pgsql \
     pgsql \
-    zip
+    zip \
+ && cd /usr/src/php \
+ && make clean
