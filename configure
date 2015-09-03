@@ -1,0 +1,1 @@
+ && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \

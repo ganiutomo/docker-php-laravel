@@ -23,3 +23,6 @@ before_install:
 
 script:
   - docker run --rm ganiutomo/php:$TAGS-$SAPI php -m
+
+after_script:
+  - docker images

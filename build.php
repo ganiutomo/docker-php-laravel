@@ -5,21 +5,12 @@ echo "Build Dockerfile!\n";
 $tags = ["5.4","5.5","5.6"];
 $sapi = ["apache","cli","fpm"];
 $mods = [
-	"5.4" => [
-		"mbstring",
-		"mcrypt",
-		"mssql",
-		"pdo_dblib",
-		"pdo_mysql",
-		"pdo_pgsql",
-		"pgsql",
-	],
 	"5.5" => ["opcache"],
+	"5.6" => ["opcache"],
 ];
 
 $versions = '';
 foreach ($tags as $tag) {
-	writeFile($tag);
 	$versions .= "* {$tag} [(Dockerfile)]({$tag}/cli/Dockerfile)\n";
 
 	foreach ($sapi as $sap) {
@@ -29,35 +20,6 @@ foreach ($tags as $tag) {
 	}
 }
 
-
-foreach ($sapi as $sap) {
-	writeFile($sap);
-}
-
-writeFile();
-
-$modules = '';
-foreach ($mods as $keys => $vals) {
-	if ($keys === '5.5') $modules .= "\nPHP 5.5 and 5.6 only:\n";
-
-	foreach ($vals as $mod) {
-		$modules .= "* {$mod}\n";
-	}
-}
-
-$read = <<<READ
-[![Build Status](https://travis-ci.org/ganiutomo/docker-php-laravel.svg?branch=develop)](https://travis-ci.org/ganiutomo/docker-php-laravel)
-
-# PHP Environment for Laravel Framework
-
-Supported tags:
-{$versions}
-Additional module list:
-{$modules}
-READ;
-
-chdir($_SERVER["PWD"]);
-file_put_contents('README.md', $read);
 
 function writeFile($version = NULL, $type = NULL) {
 	chdir($_SERVER["PWD"]);
@@ -80,7 +42,8 @@ function writeFile($version = NULL, $type = NULL) {
 function dockerFile($version = NULL, $type = NULL) {
 	$require = file_get_contents("require");
 	$configs = file_get_contents("configure");
-	$install = "    && docker-php-ext-install ";
+	$install = file_get_contents("install");
+	$cleanup = file_get_contents("cleanup");
 
 	$tag = '';
 	if (! is_null($version) or ! is_null($type)) {
@@ -91,16 +54,18 @@ function dockerFile($version = NULL, $type = NULL) {
 	$from = "FROM php".$tag."\n";
 
 	return $from."\n".
-		$require."\n".
-		$configs."\n".
-		$install.implode(mods($version), ' ')."\n";
+		$require.
+		$configs.
+		rtrim($install).
+		mods($version).
+		$cleanup;
 }
 
 function mods($version) {
 	global $mods;
 
-	if ($version !== "5.4") $mod = array_merge($mods["5.4"], $mods["5.5"]);
-	else $mod = $mods["5.4"];
+	if (array_key_exists($version, $mods))
+	$mod = " \\\n    ".implode($mods[$version], " \\\n    ");
 
-	return $mod;
+	return $mod." \\\n";
 }

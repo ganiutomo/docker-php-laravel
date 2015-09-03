@@ -1,0 +1,11 @@
+ && docker-php-ext-install \
+    intl \
+    mbstring \
+    mcrypt \
+    mssql \
+    pcntl \
+    pdo_dblib \
+    pdo_mysql \
+    pdo_pgsql \
+    pgsql \
+    zip

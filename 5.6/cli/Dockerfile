@@ -3,11 +3,24 @@ FROM php:5.6-cli
 MAINTAINER Gani Utomo <ganiutomo@gmail.com>
 
 RUN apt-get update && apt-get install -y \
-        freetds-dev \
-        libpq-dev \
-        libmcrypt-dev \
-    && cp -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/ \
-
-    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
-
-    && docker-php-ext-install mbstring mcrypt mssql pdo_dblib pdo_mysql pdo_pgsql pgsql opcache
+    freetds-dev \
+    libicu-dev \
+    libpq-dev \
+    libmcrypt-dev \
+ && rm -r /var/lib/apt/lists/* \
+ && cp -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/ \
+ && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+ && docker-php-ext-install \
+    intl \
+    mbstring \
+    mcrypt \
+    mssql \
+    pcntl \
+    pdo_dblib \
+    pdo_mysql \
+    pdo_pgsql \
+    pgsql \
+    zip \
+    opcache \
+ && cd /usr/src/php \
+ && make clean
