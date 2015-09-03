@@ -14,6 +14,7 @@ Supported tags & respective `Dockerfile` links:
 * [`5.6-fpm`,           `fpm`             (5.6/fpm/Dockerfile)   ](5.6/fpm/Dockerfile)
 
 Additional module list:
+* intl
 * mbstring
 * mcrypt
 * mssql

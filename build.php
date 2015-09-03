@@ -6,6 +6,7 @@ $tags = ["5.4","5.5","5.6"];
 $sapi = ["apache","cli","fpm"];
 $mods = [
 	"5.4" => [
+		"intl",
 		"mbstring",
 		"mcrypt",
 		"mssql",

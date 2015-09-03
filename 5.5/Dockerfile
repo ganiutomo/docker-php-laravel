@@ -10,4 +10,4 @@ RUN apt-get update && apt-get install -y \
 
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 
-    && docker-php-ext-install mbstring mcrypt mssql pdo_dblib pdo_mysql pdo_pgsql pgsql zip opcache
+    && docker-php-ext-install intl mbstring mcrypt mssql pdo_dblib pdo_mysql pdo_pgsql pgsql zip opcache
