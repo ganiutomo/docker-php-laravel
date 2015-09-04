@@ -23,6 +23,7 @@ before_install:
   - docker pull php:$TAGS-$SAPI
 script:
   - docker build -t quay.io/ganiutomo/docker-php-laravel:$TAGS-$SAPI $TAGS/$SAPI/.
+  - docker run quay.io/ganiutomo/docker-php-laravel:$TAGS-$SAPI bash -c 'if [ ${PHP_VERSION:0:3} = "5.4" ]; then composer create-project --prefer-dist laravel/laravel "~5.0.0"; else composer create-project --prefer-dist laravel/laravel "~5.1.0"; fi; cd laravel; php vendor/bin/phpunit'
 after_script:
   - docker login -u $USERNAME -p $USERPASS -e $USERMAIL quay.io
   - docker push quay.io/ganiutomo/docker-php-laravel:$TAGS-$SAPI
