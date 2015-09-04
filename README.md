@@ -2,6 +2,8 @@
 
 # PHP Environment for Laravel Framework
 
+Composer included
+
 Supported tags & respective `Dockerfile` links:
 * [`5.4-cli`,    `5.4`                    (5.4/cli/Dockerfile)   ](5.4/cli/Dockerfile)
 * [`5.4-apache`                           (5.4/apache/Dockerfile)](5.4/apache/Dockerfile)
