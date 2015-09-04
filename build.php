@@ -56,7 +56,7 @@ function dockerFile($version = NULL, $type = NULL) {
 	return $from."\n".
 		$require.
 		$configs.
-		rtrim($install).
+		$install.
 		mods($version).
 		$cleanup;
 }
@@ -64,8 +64,9 @@ function dockerFile($version = NULL, $type = NULL) {
 function mods($version) {
 	global $mods;
 
+	$mod = '';
 	if (array_key_exists($version, $mods))
-	$mod = " \\\n    ".implode($mods[$version], " \\\n    ");
+	$mod .= "    ".implode($mods[$version], " \\\n    ")." \\\n";
 
-	return $mod." \\\n";
+	return $mod;
 }

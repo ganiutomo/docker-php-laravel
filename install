@@ -1,11 +1,3 @@
- && docker-php-ext-install \
-    intl \
-    mbstring \
-    mcrypt \
-    mssql \
-    pcntl \
-    pdo_dblib \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    zip
+&& curl -sS https://getcomposer.org/installer | php \
+&& mv composer.phar /usr/local/bin/ \
+&& ln -s /usr/local/bin/composer.phar /usr/local/bin/composer \
