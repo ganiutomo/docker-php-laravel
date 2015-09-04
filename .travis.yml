@@ -1,28 +1,8 @@
 branches:
   only:
-    - develop
-
+  - develop
 sudo: required
-
 services:
   - docker
-
-env:
-  - TAGS=5.4 SAPI=cli
-  - TAGS=5.4 SAPI=fpm
-  - TAGS=5.4 SAPI=apache
-  - TAGS=5.5 SAPI=cli
-  - TAGS=5.5 SAPI=fpm
-  - TAGS=5.5 SAPI=apache
-  - TAGS=5.6 SAPI=cli
-  - TAGS=5.6 SAPI=fpm
-  - TAGS=5.6 SAPI=apache
-
-before_install:
-  - docker build -t ganiutomo/php:$TAGS-$SAPI $TAGS/$SAPI/.
-
 script:
-  - docker run --rm ganiutomo/php:$TAGS-$SAPI php -m
-
-after_script:
-  - docker images
+  - docker login -u secure: J0l/IpF3HBFXTIY6y40ifVuZrmwa9ZAGSILMInAEOgU/1ByJbEqq/zU3OYv/H2y7CScULfOVZEpG+bQtfwMNAIG/2OmetsR67y2roAd2KwxofISDF3H4fCrc1Qp9GSfUWc8sggRVyoRU0b6pLra5h4HHvXBWaKxeBpa6xWeFojJvIZlQV5wkI1IaWi5qdTWAg4zZcpbo0y8lTynobUO+KEkfH8zf6Rs1XMjRO/iHvWtcbegN+epu4+z0vq6vBjKIxgcGZ42NDDoLC7l/FvQG+EgeyVxvvEbufiNMFKAPJRwKXB3ntndpY/kiUeSDEZw28BP8r2hZBVgJCJ1CesX70uEvnlbrNKYkv3ula0kTRH5RZYo3iCbNmmGGKtigzP2jSaczl0K1XmUb6+aZ1/g9FeeFpGYLTfJEOOJ7eJkN+8Hm5nXc7QojOwyVe86L7M/Xot24sAGsZEltrcO8YCfYgC0c8xtLnmzq2N55VN6/5gakiWgWk29tn8YzqFQ+QlrLlr/Es38gaRPKbEmvGlxBTOPdkYUbxNnrEzkEfIzH8Hm0SQRq6DmJ+EQoxBtGmduIAVTNOhHWNrt+/+LyYP6ky9hFQChnGEn5HIqGGTEMPnDDL9KxEc6L6zktn1glZXFI2Vyjwmi1Rr/Q9gbE+mLae5s+nsWFwaP7XkQl6JaGges= -p secure: TuiLU2UX35xn58nO3yypOPeAfR2qLWvUJjxWnfSn+qdMXzvoVoDGmOqnst6ktHniMtN47NusW0aBR2bTS4Ie2+CETrP9p13hQaSfzE9qod75gG5acPKFwAs8nXoRwFQBEEg3pAKrpnLvNMkzbQDD6mCI1JoddTs3RQkrwI+8CL2/SSAyh9jGQpzAAFnEEeQTVAziS/ZBvcm/H4K+lIUzo1UMtOWuCSB4FJ3+2Hfzk92Pwn4PDjOIGCv+KMcNhpgXeuGQ8VQ8OXlbvy9sc6sB/Arn41yo6uu+ywnKznlqlyEA15+n+cu3HKfsQMA9BAVenP54/xLCHCdqDjUfZWn9GkpUJGeZ0ksYCt3H9jWTdmC+eHY62Ma17wwHj+D800bTQPYEU/ax7IdYD6NFhGVVW11+IpGP99kHRhY8xKE457/Acefs/N40yR7C/uu6AalOPE80z/q01uKFgQLazjdMCJ1RBwcNd8JnYhI4hWxgAb2U6qz9g2RQ7XOku8Zoq2uxuLb24lSavZ40i79bWPAcdJ5YIeyRQr4rojeaXaEMVPqdapXJ11cplcz6NNHyFdkRRC2WZkb/QLRRRxOLiuEdZXai8j64lYGbgBvhHz50zTq479hDAaCKYciLC3beyPmFXrhASMBkKUqjlAUwnbHjvyt4DXyVgo8GDA0rcSyYqRU=" quay.io
